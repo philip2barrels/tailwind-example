@@ -1,5 +1,7 @@
 # tailwind-example
 
+[![Run on Repl.it](https://repl.it/badge/github/philip2barrels/tailwind-example)](https://repl.it/github/philip2barrels/tailwind-example)
+
 ## Project setup
 ```
 npm install
