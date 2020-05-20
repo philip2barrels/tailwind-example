@@ -1,10 +1,17 @@
 <template>
   <div id="app">
-    <TWTable :datasource="response"/>
+    <div class="container">
+      <div class="fw">
+        <input v-model="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts"/>
+        <hr />
+        <TWTable :datasource="response"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+
 import TWTable from './components/TWTable.vue';
 
 export default {
@@ -14,6 +21,7 @@ export default {
   },
   data: function(){
     return {
+      url: 'https://jsonplaceholder.typicode.com/posts',
       response: [
         {
           id: 1,
@@ -28,6 +36,17 @@ export default {
           email: "killtv@gmail.com"
         }
       ]
+    }
+  },
+  watch: {
+    url: function(val){
+      try {
+        fetch(this.url)
+          .then(response => response.json())
+          .then(json => this.response = json)
+      } catch (e) {
+        alert(e)
+      }
     }
   }
 };
