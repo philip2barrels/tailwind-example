@@ -17,7 +17,7 @@
   let _ = require("lodash");
 
   export default {
-    name: "TWTable",
+    name: "Table",
     props: ["datasource"],
     computed: {
       thead: function() {

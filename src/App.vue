@@ -1,23 +1,21 @@
 <template>
   <div id="app">
     <div class="container">
-      <div class="fw">
-        <input v-model="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts"/>
-        <hr />
-        <TWTable :datasource="response"/>
-      </div>
+      <input v-model="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts"/>
+      <hr />
+      <Table :datasource="response"/>
     </div>
   </div>
 </template>
 
 <script>
 
-import TWTable from './components/TWTable.vue';
+import Table from './components/Table.vue';
 
 export default {
   name: 'App',
   components: {
-    TWTable,
+    Table,
   },
   data: function(){
     return {
