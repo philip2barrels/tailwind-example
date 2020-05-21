@@ -14,23 +14,46 @@
 </template>
 
 <script>
+
+  /**
+   * A minimalistic, sortable table
+   * @datasource Array - The data presented in the table
+   * @delegate Object - Object defining which attributes of the records are displayed
+   */
+
   let _ = require("lodash");
+
 
   export default {
     name: "Table",
-    props: ["datasource"],
+    props: ["datasource", "delegate"],
+    data: function(){
+      return {
+          sortBy: null,
+          direction: null
+      }
+    },
     computed: {
+      valid: function(){
+        return this.delegate && this.delegate.headers
+      },
       thead: function() {
-        return Array.from(
-          new Set(this.datasource.map(n => Object.keys(n)).flat())
-        );
+        if(!this.valid) { return [] }
+        return this.delegate.headers.map(h => h.key)
+      },
+      columnIndexes: function(){
+        if(!this.valid) { return [] }
+        const result = []
+        let count=0
+        for(let i=0; i<this.delegate.thead.length; i++){
+
+          result.push()
+        }
+        return result
       }
     },
     methods: {
       format: (input) => _.startCase(input)
-    },
-    mounted: function() {
-      console.log(_.startCase("foo-bar"));
     }
   };
 </script>

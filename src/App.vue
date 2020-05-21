@@ -3,7 +3,7 @@
     <div class="container">
       <input v-model="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts"/>
       <hr />
-      <Table :datasource="response"/>
+      <Table :datasource="response" :delegate="delegate"/>
     </div>
   </div>
 </template>
@@ -20,24 +20,22 @@ export default {
   data: function(){
     return {
       url: 'https://jsonplaceholder.typicode.com/posts',
-      response: [
-        {
-          id: 1,
-          first_name: "Joe",
-          last_name: "Dirt",
-          email: "dirtyjoe@gmail.com"
-        },
-        {
-          id: 2,
-          first_name: "Tyler",
-          last_name: "Durden",
-          email: "killtv@gmail.com"
+      response: [],
+      delegate: {
+        headers: [{
+          key: 'title',
+          label: 'Title'
+        }, {
+          key: 'body',
+          label: 'Body'
         }
-      ]
+        ]
+      }
     }
   },
   watch: {
     url: function(val){
+      if(!val || val === '') {return}
       try {
         fetch(this.url)
           .then(response => response.json())
