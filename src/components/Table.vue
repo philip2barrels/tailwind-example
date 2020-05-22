@@ -20,11 +20,9 @@
           :data-table-row="rowIndex + 1"
           :class="classesFor('tbody>tr>td')"
       >
-        {{thead[columnIndex]}}
         {{row[thead[columnIndex]]}} {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
-        <slot :name="thead[columnIndex]">
-          hello
-        </slot>
+        <slot :name="thead[columnIndex]" />
+<!--        Bind datasource item and only show if slot-content was provided-->
       </td>
 
     </tr>
