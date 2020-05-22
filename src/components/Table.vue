@@ -1,7 +1,7 @@
 <template>
-  <table class="min-w-full table">
-    <thead class="">
-    <tr class="">
+  <table :class="classesFor('table')">
+    <thead :class="classesFor('thead')">
+    <tr :class="classesFor('thead>tr')">
       <th v-for="(header, index) in thead"
           :key="header"
           :data-table-column="index"
@@ -12,8 +12,8 @@
       </th>
     </tr>
     </thead>
-    <tbody class="bg-white">
-    <tr v-for="(row, rowIndex) in datasource" :key="row.id" class="">
+    <tbody :class="classesFor('tbody')">
+    <tr v-for="(row, rowIndex) in datasource" :key="row.id" :class="classesFor('tbody>tr')">
       <td v-for="(column, columnIndex) in thead"
           :key="`${row.id}-${column}`"
           :data-table-column="columnIndex"
@@ -75,6 +75,16 @@
       presentCoordinatesFor: function(coords) { return this.showCoordinates ? coords : '' },
       classesFor: (el) => {
         switch (el) {
+          case 'table':
+            return 'min-w-full table'
+          case 'thead':
+            return ''
+          case 'thead>tr':
+            return ''
+          case 'tbody':
+            return 'bg-white'
+          case 'tbody>tr':
+            return ''
           case 'th':
             return 'px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'
           case 'tbody>tr>td':
