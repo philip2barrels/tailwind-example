@@ -22,7 +22,11 @@
       >
         {{thead[columnIndex]}}
         {{row[thead[columnIndex]]}} {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
+        <slot :name="thead[columnIndex]">
+          hello
+        </slot>
       </td>
+
     </tr>
     </tbody>
   </table>

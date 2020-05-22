@@ -3,7 +3,14 @@
     <div class="container">
       <input v-model="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts"/>
       <hr />
-      <Table :datasource="response" :delegate="delegate"/>
+      <Table :datasource="response" :delegate="delegate">
+        <template v-slot:title>
+          <b>FOO FREAKING BAR</b>
+        </template>
+        <template v-slot:body>
+          <b>FOO FREAKING BAR</b>
+        </template>
+      </Table>
     </div>
   </div>
 </template>
