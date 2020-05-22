@@ -54,6 +54,7 @@
    * Slots -
    * Any column can have a slot used rather than render the data
    * To provide slot content, target the key definined in the delegate for that columns header
+   * When you are provide a named slot whatever is in the slot will be displayed
    *
    * Columns or individual rows are accesible using data attributes:
    * data-table-colummn
