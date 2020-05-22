@@ -22,9 +22,16 @@
           :data-table-item="`${rowIndex + 1}-${columnIndex}`"
           :class="classesFor('tbody>tr>td')"
       >
-        {{row[thead[columnIndex]]}} {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
-        <slot :name="thead[columnIndex]" />
-<!--        Bind datasource item and only show if slot-content was provided-->
+        <template v-if="!hasSlotContent(column)">
+          {{row[thead[columnIndex]]}}
+        </template>
+
+        <slot :name="thead[columnIndex]"
+              v-bind="row[thead[columnIndex]]"
+              v-if="hasSlotContent(column)"
+        />
+
+        {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
       </td>
 
     </tr>
@@ -83,6 +90,11 @@
     },
     methods: {
       format: (input) => _.startCase(input),
+      hasSlotContent: function(key){
+        const slots  = Object.keys(this.$slots)
+        console.log(key, slots, (slots.indexOf(key) > -1))
+        return slots.indexOf(key) > -1
+      },
       presentCoordinatesFor: function(coords) { return this.showCoordinates ? coords : '' },
       classesFor: (el) => {
         switch (el) {
@@ -105,5 +117,8 @@
         }
       }
     },
+    mounted() {
+      window.f = this
+    }
   };
 </script>
