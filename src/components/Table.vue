@@ -6,6 +6,7 @@
           :key="header"
           :data-table-column="index"
           :data-table-row="0"
+          :data-table-item="`${index}-0`"
           :class="classesFor('thead>tr>th')"
       >
         {{format(header)}} {{presentCoordinatesFor(`\{${index},0\}`)}}
@@ -18,6 +19,7 @@
           :key="`${row.id}-${column}`"
           :data-table-column="columnIndex"
           :data-table-row="rowIndex + 1"
+          :data-table-item="`${rowIndex + 1}-${columnIndex}`"
           :class="classesFor('tbody>tr>td')"
       >
         {{row[thead[columnIndex]]}} {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
@@ -42,13 +44,15 @@
    * @datasource Array - The data presented in the table
    * @delegate Object - Object defining which attributes of the records are displayed
    *
-   * Coloumns and rows are accesible using the data attributes:
-   * data-table-colummn-Integer
-   * data-table-row-Integer
+   * Columns or individual rows are accesible using data attributes:
+   * data-table-colummn
+   * data-table-row
    *
-   * Example:
-   * //Returns HTMLCollection contained in first column
+   * Returns HTMLCollection contained in first column
    * document.querySelectorAll('[data-table-column="1"]');
+   *
+   * Returns HTMLCollection of item with specific coordinate
+   * document.querySelectorAll('[data-table-item="1-0"]');
    *
    */
 
