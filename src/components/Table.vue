@@ -109,8 +109,8 @@
       presentCoordinatesFor: function(coords) { return this.showCoordinates ? coords : '' },
       classesFor: (el) => {
         switch (el) {
-          // case 'table':
-          //   return 'min-w-full table'
+          case 'table':
+           return 'min-w-full table'
           case 'thead':
             return ''
           case 'thead>tr':
