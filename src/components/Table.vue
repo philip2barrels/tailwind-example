@@ -44,6 +44,10 @@
    * @datasource Array - The data presented in the table
    * @delegate Object - Object defining which attributes of the records are displayed
    *
+   * Slots -
+   * Any column can have a slot used rather than render the data
+   * To provide slot content, target the key definined in the delegate for that columns header
+   *
    * Columns or individual rows are accesible using data attributes:
    * data-table-colummn
    * data-table-row
