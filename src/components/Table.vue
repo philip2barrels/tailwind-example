@@ -2,22 +2,25 @@
   <table class="min-w-full table">
     <thead class="">
     <tr class="">
-      <th v-for="(header, index) of makeCharacterIterator(thead.length)"
+      <th v-for="(header, index) in thead"
           :key="header"
-          :class="`x-${header} x-${header}-0 ${classesFor('th')}`"
+          :data-table-column="index"
+          :data-table-row="0"
+          :class="classesFor('th')"
       >
-        {{format(thead[index])}}
+        {{format(header)}} {{`\{${index},0\}`}}
       </th>
     </tr>
     </thead>
     <tbody class="bg-white">
     <tr v-for="(row, rowIndex) in datasource" :key="row.id" class="">
-      <td v-for="(column, columnIndex) of makeCharacterIterator(thead.length)"
+      <td v-for="(column, columnIndex) in thead"
           :key="`${row.id}-${column}`"
-          :class="`y-${rowIndex + 1} y-${rowIndex + 1}-${columnIndex} ${classesFor('tbody>tr>td')}`"
+          :data-table-column="columnIndex"
+          :data-table-row="rowIndex + 1"
+          :class="classesFor('tbody>tr>td')"
       >
-        {{columnIndex.value}}
-        {{row[thead[columnIndex]]}}
+        {{row[thead[columnIndex]]}} {{`\{${rowIndex + 1},${columnIndex}\}`}}
       </td>
     </tr>
     </tbody>
@@ -28,12 +31,25 @@
 
   /**
    * A minimalistic table
+   *
+   * Goals:
+   * + stylable
+   * + testable
+   *
    * @datasource Array - The data presented in the table
    * @delegate Object - Object defining which attributes of the records are displayed
+   *
+   * Coloumns and rows are accesible using the data attributes:
+   * data-table-colummn-Integer
+   * data-table-row-Integer
+   *
+   * Example:
+   * //Returns HTMLCollection contained in first column
+   * document.querySelectorAll('[data-table-column="1"]');
+   *
    */
 
   let _ = require("lodash");
-  import { makeCharacterIterator } from '@/lib/characterIterator'
 
   export default {
     name: "Table",
@@ -41,8 +57,7 @@
     data: function(){
       return {
           sortBy: null,
-          direction: null,
-          theadIterator: null
+          direction: null
       }
     },
     computed: {
@@ -50,12 +65,11 @@
         return this.delegate && this.delegate.headers
       },
       thead: function() {
-        // if(!this.valid) { return [] }
+        if(!this.valid) { return [] }
         return this.delegate.headers.map(h => h.key)
       },
     },
     methods: {
-      makeCharacterIterator: makeCharacterIterator,
       format: (input) => _.startCase(input),
       classesFor: (el) => {
         switch (el) {
@@ -68,14 +82,5 @@
         }
       }
     },
-    watch: {
-      datasource: function(){
-        console.log('datasource changed')
-        this.theadIterator = makeCharacterIterator(this.thead.length)
-      },
-      delegate: function(){
-        this.theadIterator = makeCharacterIterator(this.thead.length)
-      },
-    }
   };
 </script>
