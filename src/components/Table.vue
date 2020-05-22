@@ -8,7 +8,7 @@
           :data-table-row="0"
           :class="classesFor('th')"
       >
-        {{format(header)}} {{`\{${index},0\}`}}
+        {{format(header)}} {{presentCoordinatesFor(`\{${index},0\}`)}}
       </th>
     </tr>
     </thead>
@@ -20,7 +20,7 @@
           :data-table-row="rowIndex + 1"
           :class="classesFor('tbody>tr>td')"
       >
-        {{row[thead[columnIndex]]}} {{`\{${rowIndex + 1},${columnIndex}\}`}}
+        {{row[thead[columnIndex]]}} {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
       </td>
     </tr>
     </tbody>
@@ -56,8 +56,9 @@
     props: ["datasource", "delegate"],
     data: function(){
       return {
-          sortBy: null,
-          direction: null
+        sortBy: null,
+        direction: null,
+        showCoordinates: false
       }
     },
     computed: {
@@ -71,6 +72,7 @@
     },
     methods: {
       format: (input) => _.startCase(input),
+      presentCoordinatesFor: function(coords) { return this.showCoordinates ? coords : '' },
       classesFor: (el) => {
         switch (el) {
           case 'th':
