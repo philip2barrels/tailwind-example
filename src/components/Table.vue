@@ -31,7 +31,6 @@
         />
         {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
       </td>
-
     </tr>
     </tbody>
   </table>
@@ -47,7 +46,7 @@
    * + testable
    *
    * @datasource Array - The data presented in the table
-   * @delegate Object - Object defining which attributes of the records are displayed
+   * @delegate Object - (Optional) Object defining which attributes of the records are displayed
    *
    * Slots -
    * Any column can have a slot used rather than render the data
