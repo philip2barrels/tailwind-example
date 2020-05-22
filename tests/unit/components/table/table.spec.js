@@ -38,19 +38,19 @@ const configuration = (datasource, delegate) => {
 }
 
 describe('@Table.delegate', () => {
-  // it('does nothing when the datasource is an empty array or null', () => {
-  //   const data = configuration('one','empty')
-  //   const wrapper = shallowMount(Table, () => data)
-  //   const vm = wrapper.vm
-  //
-  // })
-  // it('presents', () => {
-  //   const data = {
-  //     datasource: datasources.one,
-  //     delegate: delegates.one
-  //   }
-  //   const wrapper = shallowMount(Table, () => data)
-  //
-  //   expect(wrapper.html()).toEqual({})
-  // })
+  it('does nothing when the datasource is an empty array or null', () => {
+    const data = configuration('one','empty')
+    const wrapper = shallowMount(Table, () => data)
+    const vm = wrapper.vm
+
+  })
+  it('presents', () => {
+    const data = {
+      datasource: datasources.one,
+      delegate: delegates.one
+    }
+    const wrapper = shallowMount(Table, () => data)
+
+    expect(wrapper.html()).toEqual({})
+  })
 })

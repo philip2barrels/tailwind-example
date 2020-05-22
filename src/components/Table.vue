@@ -6,7 +6,7 @@
           :key="header"
           :data-table-column="index"
           :data-table-row="0"
-          :class="classesFor('th')"
+          :class="classesFor('thead>tr>th')"
       >
         {{format(header)}} {{presentCoordinatesFor(`\{${index},0\}`)}}
       </th>
@@ -20,6 +20,7 @@
           :data-table-row="rowIndex + 1"
           :class="classesFor('tbody>tr>td')"
       >
+        {{thead[columnIndex]}}
         {{row[thead[columnIndex]]}} {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
       </td>
     </tr>
@@ -81,12 +82,12 @@
             return ''
           case 'thead>tr':
             return ''
+          case 'thead>tr>th':
+            return 'px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'
           case 'tbody':
             return 'bg-white'
           case 'tbody>tr':
             return ''
-          case 'th':
-            return 'px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'
           case 'tbody>tr>td':
             return 'px-6 py-4 whitespace-no-wrap'
           default:
