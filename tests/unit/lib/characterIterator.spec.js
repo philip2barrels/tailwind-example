@@ -6,12 +6,11 @@ describe('', () => {
 
     const subject = makeCharacterIterator(800)
     let last = null
-    
+
     for(const item of subject){
       last = item
     }
     expect(last).toBe('aa')
 
   })
-
 })
