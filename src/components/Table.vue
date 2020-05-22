@@ -111,9 +111,6 @@
             return ''
         }
       }
-    },
-    mounted() {
-      window.f = this
     }
   };
 </script>
