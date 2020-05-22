@@ -4,12 +4,14 @@
       <input v-model="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts"/>
       <hr />
       <Table :datasource="response" :delegate="delegate">
-        <template v-slot:title>
-          <b>FOO FREAKING BAR</b>
-        </template>
-        <template v-slot:body>
-          <b>FOO FREAKING BAR</b>
-        </template>
+        <!--
+          <template v-slot:title>
+            <b>FOO FREAKING BAR</b>
+          </template>
+          <template v-slot:body>
+            <b>FOO FREAKING BODY</b>
+          </template>
+       -->
       </Table>
     </div>
   </div>
@@ -26,19 +28,23 @@ export default {
   },
   data: function(){
     return {
-      url: 'https://jsonplaceholder.typicode.com/posts',
+      url: '',
       response: [],
-      delegate: {
-        headers: [{
-          key: 'title',
-          label: 'Title'
-        }, {
-          key: 'body',
-          label: 'Body'
-        }
-        ]
-      }
+      delegate: null
+      // delegate: {
+      //   headers: [{
+      //     key: 'title',
+      //     label: 'Title'
+      //   }, {
+      //     key: 'body',
+      //     label: 'Body'
+      //   }
+      //   ]
+      // }
     }
+  },
+  mounted() {
+    this.url = 'https://jsonplaceholder.typicode.com/posts'
   },
   watch: {
     url: function(val){

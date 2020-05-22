@@ -87,6 +87,21 @@
         return this.delegate.headers.map(h => h.key)
       },
     },
+    watch: {
+      datasource: function(){
+        if (!this.delegate && this.datasource){
+          /*
+               Create a delegate to show all datasource's items
+               when a custom delegate hasn't been defined
+           */
+          const delegate = {headers:[]}
+          const headers = Array.from(new Set(this.datasource.map(function(item) { return Object.keys(item) }).flat()))
+
+          headers.forEach(header => delegate.headers.push({key: header, label: _.startCase(header)}))
+          this.delegate = delegate
+        }
+      }
+    },
     methods: {
       format: (input) => _.startCase(input),
       hasSlotContent: function(key){ return Object.keys(this.$slots).indexOf(key) > -1 },
