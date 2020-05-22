@@ -1,4 +1,4 @@
-# tailwind-example
+# framework-examples
 
 ## Project setup
 ```
