@@ -29,7 +29,7 @@
           {{row[thead[columnIndex]]}}
         </template>
         <slot :name="thead[columnIndex]"
-              v-bind="row[thead[columnIndex]]"
+              v-bind:item="row[thead[columnIndex]]"
               v-if="hasSlotContent(column)"
         />
         {{presentCoordinatesFor(`\{${rowIndex + 1},${columnIndex}\}`)}}
